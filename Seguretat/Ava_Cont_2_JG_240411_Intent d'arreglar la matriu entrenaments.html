@@ -57,7 +57,7 @@
 
 <body class="text-bg-secondary p-3">
 
-  <!-- Aquesta és la barra de navegació :  PREGUTNA:  perquè no funciona el desplegable de tres ratlles horitzontals?-->
+  <!-- Aquesta és la barra de navegació :  PREGUTNA:  perquè no funciona el desplegable?-->
 
   <div> 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -72,7 +72,7 @@
               <a class="nav-link active" aria-current="page" href="#">Inici</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="color: orange;" href="Ava_Cont_2_En contrucció_JG.html">Enllaç a pàgina en construcció</a>
+              <a class="nav-link" href="Ava_Cont_2_En contrucció_JG.html" style="color: orange;">Enllaç a la pàgina en construcció</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -120,7 +120,7 @@
     <!-- Botó per afegir entrenament -->
     <p>Quan hagis afegit el nom i la distància de la ruta nova, fes click en el botó</p>
     <div>
-      <button type="button" class="btn btn-warning d-flex" onclick="crearMatriu()">Clica aquí per afegir el teu entrenament</button>
+      <button type="button" class="btn btn-warning d-flex" onclick="crearMatriu1()">Clica aquí per afegir el teu entrenament</button>
     </div>
     <hr>
 
@@ -301,6 +301,7 @@
 
 
 
+
 <!-- AQUI VAN ELS SCRIPTS -->
 
 
@@ -354,6 +355,8 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
 
 <!-- Script de Generació de l'array de nous entrenaments -->
 
+
+  // Funció per crear la matriu i guardar-la en local
 <script>
   // Funció per crear la matriu i guardar-la en local
   function crearMatriu() {
@@ -371,7 +374,7 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
     // Guardar la matriu actualitzada en local
     localStorage.setItem('matriu', JSON.stringify(matriu));
 
-    // Mostra la matriu a la taula
+    // Mostra la matriu a la taulad
     mostrarMatriu(matriu);
   }
 
@@ -396,6 +399,59 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
     console.log(matriu);
   }
 </script>
+  
+
+
+ <!-- <script>
+  // Define la matriz matriu fuera de las funciones
+  function crearMatriu1() {
+    var nomruta = document.getElementById('nomruta').value;
+    var tempsruta = document.getElementById('tempsruta').value;
+
+    // Obtener la referencia de la tabla
+    var matriu1 = document.getElementById('dataGrid').getElementsByTagName('tbody')[0];
+
+    // Insertar una nueva fila en la tabla
+    var fila = matriu1.insertRow();
+
+    // Insertar celdas en la fila y asignarles los valores de las variables
+    var celda1 = fila.insertCell(0);
+    var celda2 = fila.insertCell(1);
+    
+    celda1.innerHTML = nomruta;
+    celda2.innerHTML = tempsruta;
+    
+    // Mostrar un mensaje de alerta con el valor de tempsruta
+    alert("El valor de tempsruta es: " + tempsruta);
+
+    // Llamar a la función mostrarMatriu1 sin argumentos
+    mostrarMatriu1();
+  }
+  
+  // Función para mostrar la matriz en la tabla
+  function mostrarMatriu1() {
+    // Obtener la referencia de la tabla matriu1
+    const matriu1 = document.getElementById('dataGrid').getElementsByTagName('tbody')[0];
+    
+    // Obtener la referencia de la tabla
+    const tableBody = document.querySelector('#dataGridnova tbody');
+
+    // Limpiar el contenido anterior
+    tableBody.innerHTML = '';
+
+    // Iterar sobre las filas de la matriz1 y agregarlas a la tabla
+    for (let i = 0; i < matriu1.rows.length; i++) {
+      const row = tableBody.insertRow();
+      for (let j = 0; j < matriu1.rows[i].cells.length; j++) {
+        const cell = row.insertCell();
+        cell.textContent = matriu1.rows[i].cells[j].textContent;
+      }
+    }
+
+    // Imprimir la matriz en la consola
+    console.log(matriu1);
+  }
+</script> -->
 
 
 <!-- TAULA ENTRENAMENTS -->
@@ -422,37 +478,41 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
   }
   // pregunta menor:  com fer que no sigui seleccionable els encapçalaments de la taula (el tr del head)?
 
+  //PREGUNTA:  no funciona eliminar una fila de la taula
 </script>
 
 <!-- Script per eliminar entrenament -->
 <script>
-  // Función para eliminar una fila seleccionada de la tabla
-  function eliminarFila() {
-    // Obtener la tabla y las filas
-    var table = document.getElementById("dataGrid");
-    var rows = table.getElementsByTagName("tr");
+    // Función para eliminar una fila seleccionada de la tabla
+  var files = document.querySelectorAll("#dataGrid tbody tr");
 
-    // Iterar sobre las filas
-    for (var i = 0; i < rows.length; i++) {
-      // Agregar un event listener de clic a cada fila
-      rows[i].onclick = function() {
-        // Obtener la fila actual
-        var row = this.rowIndex;
-        
-        // Confirmar si el usuario desea eliminar la fila
-        var respuesta = confirm("¿Estás segur que vols eliminar la fila seleccionada?");
-        
-        // Si el usuario confirma, eliminar la fila
-        if (respuesta) {
-          table.deleteRow(row);
-        }
-      };
+  files.forEach(function(fila) {
+    fila.addEventListener('click', function() {
+      // Marcar la fila como seleccionada
+      filaSeleccionada = this;
+    });
+  });
+
+  function eliminarFila() {
+      // Obtener la tabla y las filas
+      
+  if (filaSeleccionada) {
+      // Eliminar la fila seleccionada
+      var respuesta = confirm("¿Estás segur que vols eliminar la fila seleccionada?");
+          
+      // Si el usuario confirma, eliminar la fila
+      if (respuesta) {
+        filaSeleccionada.remove();
+      }
+
+      // Limpiar la variable de fila seleccionada
+      filaSeleccionada = null;
     }
   }
 
-  // Llamar a la función al cargar la página
-  window.onload = function() {
-    eliminarFila();
+    // Llamar a la función al cargar la página
+    window.onload = function() {
+      eliminarFila();
   };
 </script>
 
@@ -706,3 +766,21 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
 
 </body>
 </html>
+
+
+
+
+
+
+
+!<-- function agregarFila() {
+  var tabla = document.getElementById('dataGrid').getElementsByTagName('tbody')[0];
+  var fila = tabla.insertRow();
+  var celda1 = fila.insertCell(0);
+  var celda2 = fila.insertCell(1);
+  var celda3 = fila.insertCell(2);
+  var celda4 = fila.insertCell(3);
+  celda1.innerHTML = "Nueva Ruta";
+  celda2.innerHTML = "10";
+  celda3.innerHTML = "3";
+  celda4.innerHTML = "Temps 1h"; -->

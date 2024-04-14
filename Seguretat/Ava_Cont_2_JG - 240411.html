@@ -57,7 +57,7 @@
 
 <body class="text-bg-secondary p-3">
 
-  <!-- Aquesta és la barra de navegació :  PREGUTNA:  perquè no funciona el desplegable de tres ratlles horitzontals?-->
+  <!-- Aquesta és la barra de navegació :  PREGUTNA:  perquè no funciona el desplegable?-->
 
   <div> 
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -72,7 +72,7 @@
               <a class="nav-link active" aria-current="page" href="#">Inici</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" style="color: orange;" href="Ava_Cont_2_En contrucció_JG.html">Enllaç a pàgina en construcció</a>
+              <a class="nav-link" href="Ava_Cont_2_En contrucció_JG.html" target="_blank">Enllaç</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -100,9 +100,45 @@
     <hr>
 
 
-    <!-- ENTRENAMENT NOU.  Aqui s'introdueixen les dades d'un nou entrenament 
-    PREGUNTA:  Com fer que al clicar enter amb la dada de distáncia salti al botó?-->
+    <!-- TAULA D'ENTRENAMENTS -->
+    <h2 id="taula_entrenaments">Taula d'entrenaments</h2>
+    <p>Aquesta és la taula dels entrenaments</p>
 
+    <div class="container-sm"> 
+
+      <table class="taula" id="dataGrid">
+
+        <thead class="table-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Distància (KM)</th>
+            <th scope="col">Pendent (%)</th>
+            <th scope="col">Potència (W/kg)</th>
+          </tr>
+        </thead>
+       
+        <tbody>
+          <tr>
+            <th scope="row">Ruta 1</th>
+            <td>21</td>
+            <td>6</td>
+            <td>4.5</td>
+          </tr>
+          <tr>
+            <th scope="row">Ruta 2</th>
+            <td>35</td>
+            <td>12</td>
+            <td>0.5</td>
+          </tr>
+        </tbody>
+
+      </table>
+
+    </div>
+    <hr>
+
+
+    <!-- ENTRENAMENT NOU.  Aqui s'introdueixen les dades d'un nou entrenament -->
     <h2>Introdueix un entrenament nou</h2>
     <p>Edita tu mateix les dades de l'entrenament que vols introduir</p>
 
@@ -118,73 +154,58 @@
     </div>
 
     <!-- Botó per afegir entrenament -->
-    <p>Quan hagis afegit el nom i la distància de la ruta nova, fes click en el botó</p>
+    <p>Quan hagis afegit el nom i la distància de la ruta nova, fes click en el botó taronja</p>
     <div>
-      <button type="button" class="btn btn-warning d-flex" onclick="crearMatriu()">Clica aquí per afegir el teu entrenament</button>
-    </div>
-    <hr>
-
-    <!-- TAULA D'ENTRENAMENTS -->
-    <h2 id="taula_entrenaments">Taula d'entrenaments</h2>
-    <p>Aquesta és la taula dels entrenaments</p>
-
-    <div class="container-sm"> 
-
-      <table class="taula" id="dataGrid">
-        <thead class="table-light">
-          <tr>
-            <th style="width: 25%" scope="col">#</th>
-            <th style="width: 25%" scope="col">Distància (KM)</th>
-            <th style="width: 25%" scope="col">Pendent (%)</th>
-            <th style="width: 25%" scope="col">OBJECIU</th>
-          </tr>
-        </thead>
-       
-        <tbody>
-          <tr>
-            <th scope="row">Ruta 1</th>
-            <td>21</td>
-            <td>6</td>
-            <td>Temps 1h</td>
-          </tr>
-          <tr>
-            <th scope="row">Ruta 2</th>
-            <td>35</td>
-            <td>12</td>
-            <td>Temps 1h</td>
-          </tr>
-        </tbody>
-        
-      </table>
-      <!-- 
-      Faig una nova taula provisionalment a continuació de l'anterior amb les dades introduides de nous entrenaments -->
-      <table class="taula" id="dataGridnova">
-        <thead class="table-light">
-          <tr>
-            <th style="width: 25%" scope="col">#</th>
-            <th style="width: 25%" scope="col">Nou</th>
-            <th style="width: 25%" scope="col">Nou</th>
-            <th style="width: 25%" scope="col">Nou</th>
-          </tr>
-        </thead>
-       
-        <tbody>
-          <tr>
-          <!-- Aqui van les dades noves introduides PREGUNTA:  com fer que surti en negreta el nom?-->
-          </tr>
-        </tbody>
-
-      </table>
+      <button type="submit" class="btn btn-warning d-flex" onclick="crearMatriu()">Clica aquí per afegir el teu entrenament</button>
     </div>
     <br>
 
-    <!-- Botó per eliminar entrenament -->
-    <p>Si vols eliminar un dels entrenaments, fes click en el botó</p>
-    <div>
-      <button type="button" class="btn btn-warning d-flex" onclick="eliminarFila()">Clica aquí per eliminar l'entrenament seleccionat</button>
+    <!-- Generació de l'array de nous entrenaments -->
+
+    <div class="container-sm"> 
+      <table class="taula" id="resultaula">
+        <thead class="table-light">
+          <tr>
+            <th>Nom de la Ruta nova</th>
+            <th>Distància de la Ruta nova</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aquí haurien de sortir les dades introduides -->
+        </tbody>
+      </table>
     </div>
-  
+
+    <script>
+      function crearMatriu() {
+        // Obtenir els valors dels cmaps d'entrada
+        const nomRuta = document.getElementById('nomruta').value;
+        const distanciaRuta = document.getElementById('distanciaruta').value;
+        
+        // Crear una matriu amb les dades obtingudes
+        const matriu = [[nomRuta, distanciaRuta]];
+
+        // Obtenir la referència de la taula
+        const tableBody = document.querySelector('#resultaula tbody');
+
+        // Netejar el contingut anterior
+        // tableBody.innerHTML = '';
+
+        // Iterar sobre la matriu i agregar files
+        matriu.forEach(element => {
+          const row= tableBody.insertRow();
+          for (const value of element) {
+            const cell = row.insertCell();
+            cell.textContent = value;
+          }
+        });
+
+        // Imprimeix a la consola el resultat de la matriu
+        console.log(matriu);
+      }
+    </script>
     
+
     <!-- TAULA D'EXERCICIS -->
     <hr>
     <h2>Taula d'exercicis</h2>
@@ -267,35 +288,18 @@
       <div id="cronometre" style="font-size: 120px;">00.00.0</div>
       <br>
       <div>
-        <button type="button" class="btn btn-warning d-flex" onclick="detenirCronometre(); crearMatriuTemps();">Clica aquí per detenir l'entrenament</button>
+        <button type="button" class="btn btn-warning d-flex" onclick="detenirCronometre()">Clica aquí per detenir l'entrenament</button>
       </div>
       <br>
     </div>
-    <p>Quan facis click es registrarà el temps en la taula següent:</p>
-
-    <table class="taula" id="MatriuTemps">
-      <thead class="table-light">
-        <tr>
-          <th style="width: 75%" scope="col">Data entrenament</th>
-          <th style="width: 25%" scope="col">Temps registrat</th>
-        </tr>
-      </thead>
-     
-      <tbody>
-        <tr>
-        <!-- Aqui van les dades noves introduides -->
-        </tr>
-      </tbody>
-
-    </table>
-    <br>
-    <p>Quan hagis acabat l'entrenament recorda hidratar-te</p>
+    <div><p>Quan hagis acabat l'entrenament recorda hidratar-te</p></div>
 
   </div>
 
 <!-- Aqui va el footer -->
 <hr>  
-<h5>©️Infitnes 2029 | Tot el dret del món a entrenar | Sobirania entrenadora</h5>
+<h5>©️Infitnes 2029 | Tot el dret del món a entrenar | Sobirania d'entrenament</h5>
+
 
 
 
@@ -303,6 +307,30 @@
 
 <!-- AQUI VAN ELS SCRIPTS -->
 
+<!-- TAULA ENTRENAMENTS -->
+
+<!-- Script per la taula d'entrenaments: es realta en blau quan es selecciona un entrenament -->
+<script>
+  // <!-- Obtener tabla -->
+  var table = document.getElementById('dataGrid');
+
+  // Obtener las filas de la tabla
+  var rows = table.getElementsByTagName('tr');
+
+  // Iterar sobre las filas y agregar un evento clic a cada una
+  for (var i = 0; i < rows.length; i++) {
+    rows[i].addEventListener('click', function() {
+      // Resaltar la fila al hacer clic en ella
+      this.style.backgroundColor = 'lightblue';
+      // Restableix el color de fons despres de 2 segons
+      var row = this;
+        setTimeout(function() {
+          row.style.backgroundColor = '';
+        }, 2000);
+    });
+  }
+  // PREGUNTA:  com fer que no sigui seleccionable els encapçalaments de la taula (el tr del head)?
+</script>
 
 <!-- Scripts per emplenar un ENTRENAMENT NOU -->
 
@@ -351,110 +379,14 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
 });
 </script>
 
-
-<!-- Script de Generació de l'array de nous entrenaments -->
-
+<!-- Aquí es redirecciona a una pagina en construcció quan es clica sobre el botó per afegir entrenament -->
 <script>
-  // Funció per crear la matriu i guardar-la en local
-  function crearMatriu() {
-    // Obtenir els valors dels camps d'entrada
-    const nomRuta = document.getElementById('nomruta').value;
-    const distanciaRuta = document.getElementById('distanciaruta').value;
-    
-    // Obtenir les dades previament guardades en local
-    let storedMatriu = localStorage.getItem('matriu');
-    let matriu = storedMatriu ? JSON.parse(storedMatriu) : [];
-
-    // Agregar les noves dades
-    matriu.push([nomRuta, distanciaRuta]);
-
-    // Guardar la matriu actualitzada en local
-    localStorage.setItem('matriu', JSON.stringify(matriu));
-
-    // Mostra la matriu a la taula
-    mostrarMatriu(matriu);
-  }
-
-  // Funció per mostrar la matriu a la taula
-  function mostrarMatriu(matriu) {
-    // Obtenir la referència de la taula
-    const tableBody = document.querySelector('#dataGridnova tbody');
-
-    // Netejar el contingut anterior
-    tableBody.innerHTML = '';
-
-    // Iterar sobre la matriu i agregar files
-    matriu.forEach(element => {
-      const row = tableBody.insertRow();
-      for (const value of element) {
-        const cell = row.insertCell();
-        cell.textContent = value;
-      }
-    });
-
-    // Imprimeix a la consola el resultat de la matriu
-    console.log(matriu);
-  }
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
 </script>
 
-
-<!-- TAULA ENTRENAMENTS -->
-
-<!-- Script per la taula d'entrenaments: es realta en blau quan es selecciona un entrenament -->
-<script>
-  // <!-- Obtenir la taula -->
-  var table = document.getElementById('dataGrid');
-
-  // Obtenir les files de la taula
-  var rows = table.getElementsByTagName('tr');
-
-  // Iterar sobre les files i agregar un esdeveniment clic a cada una
-  for (var i = 0; i < rows.length; i++) {
-    rows[i].addEventListener('click', function() {
-      // Resaltar la fila al fer clic en ella
-      this.style.backgroundColor = 'lightblue';
-      // Restableix el color de fons despres de 20 segons
-      var row = this;
-        setTimeout(function() {
-          row.style.backgroundColor = '';
-        }, 20000);
-    });
-  }
-  // pregunta menor:  com fer que no sigui seleccionable els encapçalaments de la taula (el tr del head)?
-
-</script>
-
-<!-- Script per eliminar entrenament -->
-<script>
-  // Función para eliminar una fila seleccionada de la tabla
-  function eliminarFila() {
-    // Obtener la tabla y las filas
-    var table = document.getElementById("dataGrid");
-    var rows = table.getElementsByTagName("tr");
-
-    // Iterar sobre las filas
-    for (var i = 0; i < rows.length; i++) {
-      // Agregar un event listener de clic a cada fila
-      rows[i].onclick = function() {
-        // Obtener la fila actual
-        var row = this.rowIndex;
-        
-        // Confirmar si el usuario desea eliminar la fila
-        var respuesta = confirm("¿Estás segur que vols eliminar la fila seleccionada?");
-        
-        // Si el usuario confirma, eliminar la fila
-        if (respuesta) {
-          table.deleteRow(row);
-        }
-      };
-    }
-  }
-
-  // Llamar a la función al cargar la página
-  window.onload = function() {
-    eliminarFila();
-  };
-</script>
 
 <!-- TAULA D'EXERCICIS -->
 
@@ -483,8 +415,6 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
     container.removeChild(newElement);
   }, 6000);
 </script>
-
-<!-- PREGUNTA:  no em realitza la modificació a blanc i negre -->
 
 <!-- Script per la imatge de flexions perque surti en blanc i negre-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js"></script>
@@ -544,7 +474,6 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
 }
 </script>
 
-<!-- PREGUNTA: Tampoc surt en blanc i negre com el cas anterior de flexions -->
 <!-- Script per la imatge de pullup perque surti en blanc i negre-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.full.min.js"></script>
 <script>
@@ -611,9 +540,7 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
   trackVideoPlayback();
 </script>
 
-<!-- SCRIPT PER EXECUTAR UN ENTRENAMENT -->
-
-<!-- Funció Cronometre -->
+<!-- Cronometre -->
 <script>
   let temps = 0;
   let interval;
@@ -640,67 +567,6 @@ document.getElementById("distanciaruta").addEventListener("input", function(even
     const minutosString = String(minutos).padStart(2, '0');
 
     document.getElementById('cronometre').textContent = `${minutosString}:${segundosString}.${milisegundos}`;
-  }
-</script>
-
-<!-- Taula de registre dels temps | Funció crear matriu-->
-<script>
-  // Crear un nuevo objeto Date que contiene la fecha y hora actuales
-  var fechaActual = new Date();
-
-  // Obtener el año, mes y día por separado
-  var año = fechaActual.getFullYear();
-  var mes = fechaActual.getMonth() + 1; // Se suma 1 porque los meses comienzan desde 0
-  var dia = fechaActual.getDate();
-
-  // Formatear la fecha en el formato deseado (por ejemplo, YYYY-MM-DD)
-  var fechaFormateada = año + '-' + (mes < 10 ? '0' : '') + mes + '-' + (dia < 10 ? '0' : '') + dia;
-
-  // Imprimir la fecha formateada
-  console.log(fechaFormateada);
-</script>
-
-
-<script>
-  // Funció per crear la matriu i guardar-la en local
-  function crearMatriuTemps() {
-    // Obtenir els valors dels camps d'entrada
-    const dataEntrenament = fechaFormateada;
-    const tempsEntrenament = document.getElementById('cronometre').textContent;
-
-    // Obtenir les dades previament guardades en local
-    let storedMatriuTemps = localStorage.getItem('MatriuTemps');
-    let MatriuTemps = storedMatriuTemps ? JSON.parse(storedMatriuTemps) : [];
-
-    // Agregar les noves dades
-    MatriuTemps.push([dataEntrenament, tempsEntrenament]);
-
-    // Guardar la matriu actualitzada en local
-    localStorage.setItem('MatriuTemps', JSON.stringify(MatriuTemps));
-
-    // Mostra la matriu a la taula
-    mostrarMatriuTemps(MatriuTemps);
-  }
-
-  // Funció per mostrar la matriu a la taula
-  function mostrarMatriuTemps(MatriuTemps) {
-    // Obtenir la referència de la taula
-    const tableBodyTemps = document.querySelector('#MatriuTemps tbody');
-
-    // Netejar el contingut anterior
-    tableBodyTemps.innerHTML = '';
-
-    // Iterar sobre la matriu i agregar files
-    MatriuTemps.forEach(element => {
-      const row = tableBodyTemps.insertRow();
-      for (const value of element) {
-        const cell = row.insertCell();
-        cell.textContent = value;
-      }
-    });
-
-    // Imprimeix a la consola el resultat de la matriu
-    console.log(matriuTemps);
   }
 </script>
 
